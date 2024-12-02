@@ -7,7 +7,7 @@ const taskRoute = require("./routes/task.routes");
 const userRoute = require("./routes/user.routes");
 
 // const port = 5000;
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 const app = express();
 const uri = process.env.MONGO_URI 
 
