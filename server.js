@@ -22,6 +22,7 @@ app.use("/users", userRoute);
 mongoose
   .connect(uri)
   .then(() => {
+    console.log('connected to mongodb atlas')
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });

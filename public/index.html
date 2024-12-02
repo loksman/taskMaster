@@ -137,6 +137,7 @@
     </div>
 
     <script>
+        require('dotenv').config();
 
         if (!localStorage.getItem('authToken')) {
             window.location.href = '/public/login.html'; 
@@ -198,20 +199,23 @@
             const tasksContainer = document.getElementById("tasksContainer");
 
             try {
-                // Fetch tasks from the backend
-                const response = await fetch("http://localhost:5000/tasks");
+            // Dynamically set the API URL depending on the environment
+            const apiUrl = window.location.hostname === 'localhost' ? 'http://localhost:5000' : process.env.API_URL;
 
-                if (!response.ok) {
-                    throw new Error("Error fetching tasks");
-                }
+            // Fetch tasks from the backend
+            const response = await fetch(`${apiUrl}/tasks`);
 
-                const data = await response.json();
-                const tasks = data.tasks;
+            if (!response.ok) {
+                throw new Error("Error fetching tasks");
+            }
 
-                if (tasks.length === 0) {
-                    tasksContainer.innerHTML = "<p>No tasks available.</p>";
-                    return;
-                }
+            const data = await response.json();
+            const tasks = data.tasks;
+
+            if (tasks.length === 0) {
+                tasksContainer.innerHTML = "<p>No tasks available.</p>";
+                return;
+            }
 
                 // Clear the "Loading tasks..." message
                 tasksContainer.innerHTML = "";
