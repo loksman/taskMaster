@@ -173,7 +173,7 @@
                         const newScript = document.createElement("script");
                         newScript.textContent = script.textContent;
                         document.body.appendChild(newScript);
-                        document.body.removeChild(newScript);
+                        // document.body.removeChild(newScript);
                     });
 
                     if (callback) callback(); // Optional: Invoke callback after content is loaded
